@@ -11,7 +11,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 from .serializers import PyViSerializer
 from rest_framework.exceptions import APIException
-from pyvi import ViTokenizer
+from .ViTokenizer import ViTokenizer
 import time
 
 
@@ -29,7 +29,6 @@ class PiViView(generics.RetrieveUpdateDestroyAPIView):
 
     def update(self, request, *args, **kwargs):
         text = request.data['text']
-        print(text)
         start_time = time.time()
         k2 = [y.replace("_", ' ') if "_" in y else y for y in ViTokenizer.tokenize(text).split()]
         endtime = time.time() - start_time
